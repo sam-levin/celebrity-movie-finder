@@ -1,9 +1,9 @@
 # Celebrity Movie Finder
 
 ## Purpose
-A web-based dashboard built for users who want to know more about an actor or actress. The user can search for an actor or actress and the dashboard will present biographical information and list movies that the invididual plays a role in.
+A web-based dashboard built for users who want to know more about an actor or actress. The user can search for an actor or actress and the dashboard will present basic background information and list movies that the invididual plays a role in.
 
-Enter in your actor or actress of choice and select search to view biographical information about the actor/actress sourced form the Celebrity Ninja API. Additionally, a list of movies that the actor or actress stars in will show as well. 
+Enter in your actor or actress of choice and select search to view background information about the actor/actress sourced form the Celebrity Ninja API. Additionally, the IMBD API will provide a list of movies that the actor or actress stars in will show as well. 
 
 Previous searches are saved in localStorage and the five (5) most recent searches are available as buttons in order for easy access and re-searching.
 <br></br>
