@@ -22,7 +22,7 @@ waiting on app deployment
 ## Contribution
 Made by:
 <ol>
-Stephen Dickey
-Samuel Levin
-Justin Suter
+  <li>Stephen Dickey</li>
+  <li>Samuel Levin</li>
+  <li>Justin Suter</li>
 <ol>
