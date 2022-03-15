@@ -6,6 +6,7 @@ A web-based dashboard built for users who want to know more about an actor or ac
 Enter in your actor or actress of choice and select search to view biographical information about the actor/actress sourced form the Celebrity Ninja API. Additionally, a list of movies that the actor or actress stars in will show as well. 
 
 Previous searches are saved in localStorage and the five (5) most recent searches are available as buttons in order for easy access and re-searching.
+<br></br>
 
 ## Built With
 * HTML
@@ -13,11 +14,13 @@ Previous searches are saved in localStorage and the five (5) most recent searche
 * Javascript
 * Celebrity Ninja API - Info about the actors or actresses
 * IMDB API - Finds the movies that the Actor/Actress stars in
+<br></br>
 
 ## Website
 waiting on app deployment
 
 ![web page screenshot](waiting on app deployment)
+<br></br>
 
 ## Contribution
 Made by:
