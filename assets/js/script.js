@@ -2,7 +2,7 @@
 
 var IMDBurl = "https://imdb-api.com/en/API/FullCast/k_c2a3w0b6/tt1375666"
 
-var key = "k_c2a3w0b6"
+var key = "k_01ly574i"
 
 var ninjasUrl = "https://api.api-ninjas.com/v1/celebrity?name=LeonardoDiCaprio"
 
@@ -16,7 +16,7 @@ var testActorName = 'Leonardo DiCaprio'
 
 var printActorDetails = function(actorName, actorData){
     var actorNameEl = $("<h5>").text(actorName)
-    var actorHeightEl = $("<h5>").text("Height:" + actorData[0].height + " meters ")
+    var actorHeightEl = $("<h5>").text("Height: " + actorData[0].height + " meters ")
     var actorAgeEl = $("<h5>").text("Age: " + actorData[0].age + " years old")
     mainEl.append(actorNameEl, actorHeightEl, actorAgeEl)
 }
