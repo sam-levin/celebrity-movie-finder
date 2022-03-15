@@ -13,3 +13,16 @@ Previous searches are saved in localStorage and the five (5) most recent searche
 * Javascript
 * Celebrity Ninja API - Info about the actors or actresses
 * IMDB API - Finds the movies that the Actor/Actress stars in
+
+## Website
+waiting on app deployment
+
+![web page screenshot](waiting on app deployment)
+
+## Contribution
+Made by:
+<ol>
+Stephen Dickey
+Samuel Levin
+Justin Suter
+<ol>
