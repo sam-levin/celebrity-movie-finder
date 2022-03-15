@@ -41,7 +41,9 @@ $.ajax({
     }
 });
 
-$("#actor-form-input").on("click", "button",function(event){
+
+// This code isnt working atm
+/*$("#actor-form-input").on("click", "button",function(event){
     event.preventDefault();
     var inputActor = $("#actor-name").val()
     $("#actor-name").val("")
@@ -50,4 +52,4 @@ $("#actor-form-input").on("click", "button",function(event){
     } else {
         console.log(inputActor)
     }
-})
+}) */
