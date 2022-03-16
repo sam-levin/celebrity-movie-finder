@@ -16,6 +16,8 @@ var ninjasKey = "EbyKJN6Fx+lZBTlMbCLTSw==0t4uz4G3aPpnWFgY"
 
 var submitBtn = document.getElementById("submit-btn");
 
+var clearBtn = document.getElementById("clear-btn");
+
 // we dont want background color to show up until search 
 // will add class later
 var mainDiv = document.getElementById("main-content");
@@ -245,7 +247,23 @@ var buttonHandler = function (event) {
     
 }
 
+/////////////////////////////////////////////////////////////////////////////
+
+// function to clear screen data
+
+var clearButtonHandler = function () {
+
+    inputEl.textContent = "";
+
+    mainDiv.textContent = "";
+
+}
+
 
 // event listener runs buttonHandler function on submit btn
 
 submitBtn.addEventListener("click", buttonHandler);
+
+// event listener on clear button
+
+clearBtn.addEventListener("click", clearButtonHandler);
