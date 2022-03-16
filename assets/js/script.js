@@ -1,15 +1,24 @@
-// script file to see fetch for imdb, celebrity api
+// script file to see fetch for yelp
 
-
-// variable declarations
+// imdb API key
 
 var key = "k_01ly574i"
 
+// url to API Ninjas Celebrity API
+
 var ninjasUrl = "https://api.api-ninjas.com/v1/celebrity?name="
+
+// Celebrity API key
 
 var ninjasKey = "EbyKJN6Fx+lZBTlMbCLTSw==0t4uz4G3aPpnWFgY"
 
+// targeting some html elements
+
 var submitBtn = document.getElementById("submit-btn");
+
+// we dont want background color to show up until search 
+// will add class later
+var mainDiv = document.getElementById("main-content");
 
 var inputEl = document.querySelector("#actor-input");
 
@@ -17,21 +26,27 @@ var mainContainer = document.querySelector(".main-container");
 
 var actorPicContainer = document.querySelector(".pic-container");
 
-// buttonHandler function
-
+// function to search user input for data from both APIs
 
 var buttonHandler = function (event) {
 
-
-    // prevent page refresh
+    // prevents browser refresh
 
     event.preventDefault();
+
+    // takes user input and stores it in variable
     
     var actorName = inputEl.value.trim();
 
-    // dynamic search based on user input
+    // gives mainDiv a class so background will appear
+
+    mainDiv.classList.add("has-background-dark");
+
+    // url to IMDB API with user search
 
     var url = "https://imdb-api.com/en/API/SearchName/k_01ly574i/" + actorName;
+
+    // fetch IMDB
 
     fetch(url).then(function(response) {
 
@@ -41,9 +56,11 @@ var buttonHandler = function (event) {
 
             console.log(data.results[0].id);
 
+            // obtain IMDB Actor Id
+
             var actorId = data.results[0].id
 
-            // now searching imdb with newly acquired actor id
+            // search IMDB again for actor page
 
             var secondUrl = "https://imdb-api.com/API/Name/k_01ly574i/" + actorId;
 
@@ -51,45 +68,140 @@ var buttonHandler = function (event) {
 
                 response.json().then(function(data) {
 
-                    // we obtain info about the movies they're known for, and an image
+                    // obtain image, movies/shows the actor is known for
 
                     console.log(data);
 
                     console.log(data.image);
 
                     console.log(data.knownFor);
-                
+
+                    // create dynamic elements
+
+                    var actorContainer = document.createElement("div");
+
+                    var actorPic = document.createElement("img");
+
+                    // src for picture comes from IMDB 
+
+                    actorPic.src = data.image
+
+                    var actorMovieContainer = document.createElement("div");
+                    
+                    // movie titles from IMDB
+                    
+                    var knownFor1 = data.knownFor[0].fullTitle;
+
+                    var knownFor2 = data.knownFor[1].fullTitle;
+
+                    var knownFor3 = data.knownFor[2].fullTitle;
+                    
+
+                    actorMovieContainer.textContent = "This actor is known for: " +
+                    
+                    knownFor1 + ", " + knownFor2 + ", " + knownFor3;
+
+                    // add class for styling 
+                    
+                    actorMovieContainer.classList.add("is-size-3")
+
+                    // append elements
+
+                    actorPicContainer.appendChild(actorPic);
+
+                    actorContainer.appendChild(actorMovieContainer);
+
+                    mainContainer.appendChild(actorContainer);
+
                 })
 
             });
+
         })
+
     });
 
-    // fetching celebrity API data with user input
+    // fetching Celebrity API
 
     $.ajax({
 
         method: 'GET',
-        url: 'https://api.api-ninjas.com/v1/celebrity?name=' + actorName,
-        headers: { 'X-Api-Key': 'EbyKJN6Fx+lZBTlMbCLTSw==0t4uz4G3aPpnWFgY'},
-        contentType: 'application/json',
 
-        // succesful request will console log data we want
+        // search Celebrity API with user input
+
+        url: 'https://api.api-ninjas.com/v1/celebrity?name=' + actorName,
+
+        // our Celebrity API key in header request for authorization
+
+        headers: { 'X-Api-Key': 'EbyKJN6Fx+lZBTlMbCLTSw==0t4uz4G3aPpnWFgY'},
+
+        contentType: 'application/json',
 
         success: function(result) {
 
+            // obtain facts about actor from Celebrity API
+
             console.log(result);
 
+            var actorInfoContainer = document.createElement("div");
+
+            var actorName = document.createElement("p");
+
+            var actorAge = document.createElement("p");
+
+            var actorBirthday = document.createElement("p");
+
+            var actorNationality = document.createElement("p");
+
+            var name = result[0].name.toUpperCase();
+            
+            var age = result[0].age;
+
+            var birthday = result[0].birthdy;
+
+            var nationality = result[0].nationality.toUpperCase();
+
+            // we display actor's name, age, birthday, nationality
+
+            actorName.textContent = "Name: " + name;
+
+            // update class for stling
+
+            actorName.classList.add("is-size-2");
+
+            actorAge.textContent = "Age: " + age;
+
+            actorAge.classList.add("is-size-3");
+
+            actorBirthday.textContent = "Birthday: " + birthday;
+
+            actorBirthday.classList.add("is-size-3");
+
+            actorNationality.textContent = "Nationality: " + nationality;
+
+            actorNationality.classList.add("is-size-3");
+
+            actorInfoContainer.appendChild(actorName);
+
+            actorInfoContainer.appendChild(actorAge);
+
+            actorInfoContainer.appendChild(actorBirthday);
+
+            actorInfoContainer.appendChild(actorNationality);
+
+            mainContainer.appendChild(actorInfoContainer);
 
         },
+
         error: function ajaxError(jqXHR) {
 
             console.error('Error: ', jqXHR.responseText);
         }
+
     }); 
     
 }
 
-// an event listener for our submit button
+// event listener runs buttonHandler function on submit btn
 
 submitBtn.addEventListener("click", buttonHandler);
