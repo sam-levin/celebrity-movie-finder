@@ -1,0 +1,9 @@
+/* style sheet */
+
+
+
+/* want to limit size of returned image */
+.pic-container img {
+    max-height: 500px;
+    max-width: 500px;
+  }

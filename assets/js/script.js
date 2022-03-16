@@ -50,74 +50,106 @@ var buttonHandler = function (event) {
 
     fetch(url).then(function(response) {
 
-        response.json().then(function(data) {
+        if (response.ok === true) {
 
-            console.log(data);
+            response.json().then(function(data) {
 
-            console.log(data.results[0].id);
+                console.log(data);
 
-            // obtain IMDB Actor Id
+                console.log(data.results[0].id);
 
-            var actorId = data.results[0].id
+                // obtain IMDB Actor Id
 
-            // search IMDB again for actor page
+                var actorId = data.results[0].id
 
-            var secondUrl = "https://imdb-api.com/API/Name/k_01ly574i/" + actorId;
+                // search IMDB again for actor page
 
-            fetch(secondUrl).then(function(response) {
+                var secondUrl = "https://imdb-api.com/API/Name/k_01ly574i/" + actorId;
 
-                response.json().then(function(data) {
+                fetch(secondUrl).then(function(response) {
 
-                    // obtain image, movies/shows the actor is known for
+                    response.json().then(function(data) {
 
-                    console.log(data);
+                        // obtain image, movies/shows the actor is known for
 
-                    console.log(data.image);
+                        console.log(data);
 
-                    console.log(data.knownFor);
+                        console.log(data.image);
 
-                    // create dynamic elements
+                        console.log(data.knownFor);
 
-                    var actorContainer = document.createElement("div");
+                        // create dynamic elements
 
-                    var actorPic = document.createElement("img");
+                        var actorContainer = document.createElement("div");
 
-                    // src for picture comes from IMDB 
+                        var actorPic = document.createElement("img");
 
-                    actorPic.src = data.image
+                        // src for picture comes from IMDB 
 
-                    var actorMovieContainer = document.createElement("div");
-                    
-                    // movie titles from IMDB
-                    
-                    var knownFor1 = data.knownFor[0].fullTitle;
+                        actorPic.src = data.image
 
-                    var knownFor2 = data.knownFor[1].fullTitle;
+                        var actorMovieContainer = document.createElement("div");
 
-                    var knownFor3 = data.knownFor[2].fullTitle;
-                    
+                        var actorAwardsContainer = document.createElement("div");
 
-                    actorMovieContainer.textContent = "This actor is known for: " +
-                    
-                    knownFor1 + ", " + knownFor2 + ", " + knownFor3;
+                        var actorSummaryContainer = document.createElement("div");
+                        
+                        // movie titles from IMDB
+                        
+                        var knownFor1 = data.knownFor[0].fullTitle;
 
-                    // add class for styling 
-                    
-                    actorMovieContainer.classList.add("is-size-3")
+                        var knownFor2 = data.knownFor[1].fullTitle;
 
-                    // append elements
+                        var knownFor3 = data.knownFor[2].fullTitle;
 
-                    actorPicContainer.appendChild(actorPic);
+                        var knownFor4 = data.knownFor[3].fullTitle;
 
-                    actorContainer.appendChild(actorMovieContainer);
+                        var awards = data.awards;
 
-                    mainContainer.appendChild(actorContainer);
+                        //var summary = data.summary;
+                        
 
-                })
+                        actorMovieContainer.textContent = "This actor is known for : " +
+                        
+                        knownFor1 + ", " + knownFor2 + ", " + knownFor3 + ", " + knownFor4 + ".";
 
-            });
+                        actorAwardsContainer.textContent = "Awards : " + awards;
 
-        })
+                        //actorSummaryContainer.textContent = "Summary: " + summary;
+
+                        // add class for styling 
+
+                        actorMovieContainer.classList.add("is-size-3");
+
+                        actorAwardsContainer.classList.add("is-size-3");
+
+                        //actorSummaryContainer.classList.add("is-size-3");
+
+                        // append elements
+
+                        actorPicContainer.appendChild(actorPic);
+
+                        actorContainer.appendChild(actorAwardsContainer);
+
+                        actorContainer.appendChild(actorMovieContainer);
+
+                        // actorContainer.appendChild(actorSummaryContainer);
+
+                        mainContainer.appendChild(actorContainer);
+
+                    })
+
+                });
+
+            })
+
+        }
+
+        else if ( response.status === 400 ) { 
+            
+            window.alert("Whoops! Something went wrong. Please try again.");
+
+        }
 
     });
 
@@ -153,6 +185,8 @@ var buttonHandler = function (event) {
 
             var actorNationality = document.createElement("p");
 
+            var actorHeight = document.createElement("p");
+
             var name = result[0].name.toUpperCase();
             
             var age = result[0].age;
@@ -161,25 +195,32 @@ var buttonHandler = function (event) {
 
             var nationality = result[0].nationality.toUpperCase();
 
+            var height = result[0].height;
+
+
             // we display actor's name, age, birthday, nationality
 
-            actorName.textContent = "Name: " + name;
+            actorName.textContent = "Name : " + name;
 
             // update class for stling
 
             actorName.classList.add("is-size-2");
 
-            actorAge.textContent = "Age: " + age;
+            actorAge.textContent = "Age : " + age;
 
             actorAge.classList.add("is-size-3");
 
-            actorBirthday.textContent = "Birthday: " + birthday;
+            actorBirthday.textContent = "Birthday : " + birthday;
 
             actorBirthday.classList.add("is-size-3");
 
-            actorNationality.textContent = "Nationality: " + nationality;
+            actorNationality.textContent = "Nationality : " + nationality;
 
             actorNationality.classList.add("is-size-3");
+
+            actorHeight.textContent = "Height : " + height + " meters";
+
+            actorHeight.classList.add("is-size-3");
 
             actorInfoContainer.appendChild(actorName);
 
@@ -188,6 +229,8 @@ var buttonHandler = function (event) {
             actorInfoContainer.appendChild(actorBirthday);
 
             actorInfoContainer.appendChild(actorNationality);
+
+            actorInfoContainer.appendChild(actorHeight);
 
             mainContainer.appendChild(actorInfoContainer);
 
@@ -201,6 +244,7 @@ var buttonHandler = function (event) {
     }); 
     
 }
+
 
 // event listener runs buttonHandler function on submit btn
 
