@@ -18,8 +18,8 @@ var submitBtn = document.getElementById("submit-btn");
 
 var clearBtn = document.getElementById("clear-btn");
 
-// we dont want background color to show up until search 
-// will add class later
+var clearFavoritesBtn = document.getElementById("clear-favorites-btn");
+
 var mainDiv = document.getElementById("main-content");
 
 var inputEl = document.querySelector("#actor-input");
@@ -27,6 +27,19 @@ var inputEl = document.querySelector("#actor-input");
 var mainContainer = document.querySelector(".main-container");
 
 var actorPicContainer = document.querySelector(".pic-container");
+
+var formElement = document.querySelector(".form-container");
+
+var favorites = document.getElementById("favorites");
+
+var favoriteAdd = document.querySelector(".favorites");
+
+
+
+
+/////////////////////////////////////////////////////////
+
+
 
 // function to search user input for data from both APIs
 
@@ -49,10 +62,6 @@ var buttonHandler = function (event) {
     var url = "https://imdb-api.com/en/API/SearchName/k_01ly574i/" + actorName;
 
     // have actorName become a favorite
-
-    var favorites = document.getElementById("favorites");
-
-    var favoriteAdd = document.querySelector(".favorites");
 
     favoriteAdd.textContent = inputEl.value.trim();
 
@@ -262,23 +271,45 @@ var buttonHandler = function (event) {
 
 /////////////////////////////////////////////////////////////////////////////
 
-// function to clear screen data
 
-var clearButtonHandler = function (event) {
-
-    event.preventDefault();
-
-    inputEl.textContent = "";
-
-    mainDiv.textContent = "";
-
-}
 
 
 // event listener runs buttonHandler function on submit btn
 
 submitBtn.addEventListener("click", buttonHandler);
 
+
+
+// function to clear screen data
+
+var clearButtonHandler = function (event) {
+
+    event.preventDefault();
+
+    mainDiv.textContent = "";
+
+    inputEl.value = "";
+
+    mainDiv.classList.remove("has-background-dark");
+
+
+}
+
 // event listener on clear button
 
 clearBtn.addEventListener("click", clearButtonHandler);
+
+// function to clear favorites
+
+var clearFavorites = function (event) {
+
+    event.preventDefault();
+
+    favoriteAdd.textContent = "";
+
+
+}
+
+// event listener for clear favorites button
+ 
+clearFavoritesBtn.addEventListener("click" , clearFavorites);
