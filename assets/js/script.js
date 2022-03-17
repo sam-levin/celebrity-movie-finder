@@ -73,7 +73,6 @@ var buttonHandler = function (event) {
     
 
     // fetch IMDB
-
     fetch(url).then(function(response) {
         response.json().then(function(data) {
             if (data.errorMessage === "") {
@@ -103,9 +102,6 @@ var buttonHandler = function (event) {
                 }
             }
 
-            console.log(data);
-            console.log(data.results[0].id);
-
             // obtain IMDB Actor Id
             var actorId = data.results[0].id
 
@@ -113,82 +109,55 @@ var buttonHandler = function (event) {
             var secondUrl = "https://imdb-api.com/API/Name/k_01ly574i/" + actorId;
 
             fetch(secondUrl).then(function(response) {
-
                  response.json().then(function(data) {
 
                     // obtain image, movies/shows the actor is known for
-
                     console.log(data);
-
                     console.log(data.image);
-
                     console.log(data.knownFor);
 
                     // create dynamic elements
-
                     var actorContainer = document.createElement("div");
-
                     var actorPic = document.createElement("img");
 
                     // src for picture comes from IMDB 
 
                     actorPic.src = data.image
-
                     var actorMovieContainer = document.createElement("div");
-
                     var actorAwardsContainer = document.createElement("div");
-
                     var actorSummaryContainer = document.createElement("div");
-                        
-                    // movie titles from IMDB
-                        
+
+                    // movie titles from IMDB    
                     var knownFor1 = data.knownFor[0].fullTitle;
-
                     var knownFor2 = data.knownFor[1].fullTitle;
-
                     var knownFor3 = data.knownFor[2].fullTitle;
-
                     var knownFor4 = data.knownFor[3].fullTitle;
-
                     var awards = data.awards;
 
                     //var summary = data.summary;
                     
 
-                    actorMovieContainer.textContent = "This actor is known for : " +
-                    
+                    actorMovieContainer.textContent = "This actor is known for : " +                    
                     knownFor1 + ", " + knownFor2 + ", " + knownFor3 + ", " + knownFor4 + ".";
-
                     actorAwardsContainer.textContent = "Awards : " + awards;
-
                     //actorSummaryContainer.textContent = "Summary: " + summary;
 
                     // add class for styling 
-
                     actorMovieContainer.classList.add("is-size-3");
-
                     actorAwardsContainer.classList.add("is-size-3");
 
                     //actorSummaryContainer.classList.add("is-size-3");
 
                     // append elements
-
                     actorPicContainer.appendChild(actorPic);
-
                     actorContainer.appendChild(actorAwardsContainer);
-
                     actorContainer.appendChild(actorMovieContainer);
 
                     // actorContainer.appendChild(actorSummaryContainer);
-
                     mainContainer.appendChild(actorContainer);
-
                 })
-
             })
-
         })
-
     })
 
         
@@ -198,133 +167,80 @@ var buttonHandler = function (event) {
     
 
     // fetching Celebrity API
-
     $.ajax({
-
         method: 'GET',
-
         // search Celebrity API with user input
-
         url: 'https://api.api-ninjas.com/v1/celebrity?name=' + actorName,
-
         // our Celebrity API key in header request for authorization
-
         headers: { 'X-Api-Key': 'EbyKJN6Fx+lZBTlMbCLTSw==0t4uz4G3aPpnWFgY'},
-
         contentType: 'application/json',
 
         success: function(result) {
-
             // obtain facts about actor from Celebrity API
-
             console.log(result);
 
             if (result.length === 0) {
-
                 // When the user clicks on the button, open the modal
-
                 mainDiv.classList.remove("has-background-dark");
-
+                
                 // Get the modal
-  
                 var modal = document.getElementById("myModal");
-  
-                // Get the <span> element that closes the modal
-  
+
+                // Get the <span> element that closes the modal  
                 var span = document.getElementsByClassName("close")[0];
-  
                 modal.style.display = "flex";
   
-                // When the user clicks on <span> (x), close the modal
-  
+                // When the user clicks on <span> (x), close the modal  
                 span.onclick = function() {
-  
                     modal.style.display = "none";
-
                 }
   
-                // When the user clicks anywhere outside of the modal, close it
-                  
+                // When the user clicks anywhere outside of the modal, close it                 
                 window.onclick = function(event) {
-  
                     if (event.target == modal) {
-  
                         modal.style.display = "none";
-  
                     }
-
                 }
-
             }
 
             var actorInfoContainer = document.createElement("div");
-
             var actorName = document.createElement("p");
-
             var actorAge = document.createElement("p");
-
             var actorBirthday = document.createElement("p");
-
             var actorNationality = document.createElement("p");
-
             var actorHeight = document.createElement("p");
-
             var name = result[0].name.toUpperCase();
-            
             var age = result[0].age;
-
             var birthday = result[0].birthdy;
-
             var nationality = result[0].nationality.toUpperCase();
-
             var height = result[0].height;
 
-
             // we display actor's name, age, birthday, nationality
-
             actorName.textContent = "Name : " + name;
 
             // update class for stling
-
             actorName.classList.add("is-size-2");
-
             actorAge.textContent = "Age : " + age;
-
             actorAge.classList.add("is-size-3");
-
             actorBirthday.textContent = "Birthday : " + birthday;
-
             actorBirthday.classList.add("is-size-3");
-
             actorNationality.textContent = "Nationality : " + nationality;
-
             actorNationality.classList.add("is-size-3");
-
             actorHeight.textContent = "Height : " + height + " meters";
-
             actorHeight.classList.add("is-size-3");
-
+            
             actorInfoContainer.appendChild(actorName);
-
             actorInfoContainer.appendChild(actorAge);
-
             actorInfoContainer.appendChild(actorBirthday);
-
             actorInfoContainer.appendChild(actorNationality);
-
             actorInfoContainer.appendChild(actorHeight);
-
             mainContainer.appendChild(actorInfoContainer);
-
         },
 
         error: function ajaxError(jqXHR) {
-
             console.error('Error: ', jqXHR.responseText);
         }
-
     })
-  
 }
 
 /////////////////////////////////////////////////////////////////////////////
