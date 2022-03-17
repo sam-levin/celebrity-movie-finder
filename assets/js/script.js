@@ -23,19 +23,11 @@ var formElement = document.querySelector(".form-container");
 var favorites = document.getElementById("favorites");
 var favoriteAdd = document.querySelector(".favorites");
 
-
-
-
 /////////////////////////////////////////////////////////
 
 
-
-// function to search user input for data from both APIs
-
 var clear = function() {
-    console.log("clearfunction ran")
     inputEl.value = "";
-    mainDiv.textContent = "";
 }
 
 var clearButtonHandler = function (event) {
@@ -43,72 +35,24 @@ var clearButtonHandler = function (event) {
     clear();
 }
 
-var createActorData = function (actorInput){
-
-}
-
-var addToFavoritesEl = function(actorInput) {
-    // have actorName become a favorite
-    favoriteAdd.textContent = actorInput;
-    favoriteAdd.classList.add("has-text-light", "is-size-5");
-    favorites.appendChild(favoriteAdd);
-}
-
-var buttonHandler = function (event) {
-
-    // prevents browser refresh
-    event.preventDefault();
-
-    // takes user input and stores it in variable
-    var actorName = inputEl.value.trim();
-    
-    addToFavoritesEl(actorName);
-
-    // gives mainDiv a class so background will appear
-    mainDiv.classList.add("has-background-dark");
-
-    // url to IMDB API with user search
-    var url = "https://imdb-api.com/en/API/SearchName/k_01ly574i/" + actorName;
-
-    
-
+var createActorData = function (actorName){
+    var imdbUrl = "https://imdb-api.com/en/API/SearchName/k_01ly574i/" + actorName;
     // fetch IMDB
-    fetch(url).then(function(response) {
+    fetch(imdbUrl).then(function(response) {
         response.json().then(function(data) {
             if (data.errorMessage === "") {
                 console.log("success");
             } else {
-                // When the user clicks on the button, open the modal
-                mainDiv.classList.remove("has-background-dark");
-
-                // Get the modal
-                var modal = document.getElementById("myModal");
-
-                // Get the <span> element that closes the modal
-                var span = document.getElementsByClassName("close")[0];
-
-                modal.style.display = "flex";
-
-                // When the user clicks on <span> (x), close the modal
-                span.onclick = function() {
-                    modal.style.display = "none";
-                }
-
-                // When the user clicks anywhere outside of the modal, close it
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                    modal.style.display = "none";
-                    }
-                }
+                displayErrorModal();
             }
 
             // obtain IMDB Actor Id
             var actorId = data.results[0].id
 
             // search IMDB again for actor page
-            var secondUrl = "https://imdb-api.com/API/Name/k_01ly574i/" + actorId;
+            var secondImdbUrl = "https://imdb-api.com/API/Name/k_01ly574i/" + actorId;
 
-            fetch(secondUrl).then(function(response) {
+            fetch(secondImdbUrl).then(function(response) {
                  response.json().then(function(data) {
 
                     // obtain image, movies/shows the actor is known for
@@ -160,12 +104,6 @@ var buttonHandler = function (event) {
         })
     })
 
-        
-
-      
-
-    
-
     // fetching Celebrity API
     $.ajax({
         method: 'GET',
@@ -180,27 +118,7 @@ var buttonHandler = function (event) {
             console.log(result);
 
             if (result.length === 0) {
-                // When the user clicks on the button, open the modal
-                mainDiv.classList.remove("has-background-dark");
-                
-                // Get the modal
-                var modal = document.getElementById("myModal");
-
-                // Get the <span> element that closes the modal  
-                var span = document.getElementsByClassName("close")[0];
-                modal.style.display = "flex";
-  
-                // When the user clicks on <span> (x), close the modal  
-                span.onclick = function() {
-                    modal.style.display = "none";
-                }
-  
-                // When the user clicks anywhere outside of the modal, close it                 
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                }
+                displayErrorModal();
             }
 
             var actorInfoContainer = document.createElement("div");
@@ -243,16 +161,59 @@ var buttonHandler = function (event) {
     })
 }
 
+var displayErrorModal = function () {
+    // When the user clicks on the button, open the modal
+    mainDiv.classList.remove("has-background-dark");
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    modal.style.display = "flex";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    }
+}
+
+var addToFavoritesEl = function(actorInput) {
+    // have actorName become a favorite
+    favoriteAdd.textContent = actorInput;
+    favoriteAdd.classList.add("has-text-light", "is-size-5");
+    favorites.appendChild(favoriteAdd);
+}
+
+var buttonHandler = function (event) {
+
+    // prevents browser refresh
+    event.preventDefault();
+    
+    // takes user input and stores it in variable
+    var actorName = inputEl.value.trim();
+
+    // gives mainDiv a class so background will appear
+    mainDiv.classList.add("has-background-dark");
+    createActorData(actorName);    
+    addToFavoritesEl(actorName);
+}
+
 /////////////////////////////////////////////////////////////////////////////
 
 
 
 
 // event listener runs buttonHandler function on submit btn
-
 submitBtn.addEventListener("click", buttonHandler);
-
-
 
 // function to clear screen data
 /*clearFavorites(event) {
@@ -266,25 +227,14 @@ submitBtn.addEventListener("click", buttonHandler);
 
 }*/
 
-    
-
-
-
 // event listener on clear button
-
 clearBtn.addEventListener("click", clearButtonHandler);
 
 // function to clear favorites
-
 var clearFavorites = function (event) {
-
     event.preventDefault();
-
     favoriteAdd.textContent = "";
-
-
 }
 
 // event listener for clear favorites button
- 
 clearFavoritesBtn.addEventListener("click" , clearFavorites);

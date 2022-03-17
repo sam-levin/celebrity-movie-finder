@@ -1,43 +1,27 @@
 <!DOCTYPE html>
-
 <html class="no-js" lang="en">
-    
     <head>
-
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
         <!-- style sheet -->
-
         <link rel="stylesheet" href="./assets/css/style.css">
-
         <!-- Bulma library -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" /> 
-
         <!-- jQuery library --> 
 
         <script
         src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         crossorigin="anonymous"></script>
-
         <title class="title size-2">Celebrity Movie Finder</title>
-
     </head>
-
 <body>
 
     <div class="Columns has-background-dark has-text-light">
-
         <div class="column">
-
             <h2 class="is-size-2 has-text-weight-bold has-text-centered">Celebrity Finder</h2>
-
         </div>
-
-    
-
     </div>
 
     <!-- The Modal -->
@@ -48,54 +32,32 @@
             <span class="close topright">&times;</span>
             <p>Your celeb is not famous.. 😅  Please try again.</p>
         </div>
-  
   </div>
 
     <div class="rows">
 
         <div class="row has-background-dark has-text-light py-4 " >
-
             <div class="form-container">
-                
                 <h4 class="has-text-weight-bold is-size-3">Search for a Movie Star:</h4>
-
                     <form id="user-form">
-
                     <label class="form-label" for="actor"></label>
-
                     <input name="actor" id="actor-input" type="text" autofocus="true" class="form-input" placeholder="Enter Name Here"/>
-
                     <button type="submit" id="submit-btn" class="button submit-btn is-small is-success">Get Info!</button>
-
                     <button type="submit" id="clear-btn" class="button clear-btn is-small is-danger">Clear!</button>
-
             </div>
-
         </div>
 
         <div class= "row has-background-dark has-text-light py-6 ">
-
             <div class="columns has-text-weight-bold is-size-4 mx-2" id="favorites">Favorites :</div>
             <button type="submit" id="clear-favorites-btn" class="column has-text-weight-medium">Clear Favorites</button>
-                <p class="column mx-6 favorites"></p>
-                
-                    
-    
-            
-
-
+            <p class="column mx-6 favorites"></p>
         </div>
 
         <div id="main-content" class="row has-text-light has py-2 my-2 mt-2">
-
             <div class="pic-container has-text-centered">
-      
             </div>
-
             <div class="main-container">
-
             </div>
-
         </div>
 
     </div>
