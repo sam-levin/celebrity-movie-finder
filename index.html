@@ -1,48 +1,95 @@
 <!DOCTYPE html>
+
 <html class="no-js" lang="en">
+    
     <head>
+
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" crossorigin="anonymous">
+        
+        <!-- style sheet -->
+
         <link rel="stylesheet" href="./assets/css/style.css">
+
+        <!-- Bulma library -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" /> 
+
+        <!-- jQuery library --> 
+
+        <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+
         <title>Celebrity Movie Finder</title>
 
         <!-- Compressed CSS -->
 
-<!-- Compressed JavaScript -->
     </head>
+
 <body>
-    <div class="top-bar">
-        <div class="top-bar-left">
-          <ul class="menu">
-            <li class="menu-text"><h2>Celebrity Movie Finder</h2></li>
-          </ul>
+
+    <div class="Columns has-background-light has-text-dark">
+
+        <div class="column">
+
+            <h2 class="is-size-2 has-text-weight-bold has-text-centered">Celebrity Finder</h2></li>
+
         </div>
-        <div class="top-bar-right">
-            <ul class="menu">
-                <li id="clear-favorites">Clear Favorites</li>
-                <li>Generate Random</li>
-            </ul>
+
+        <div class="column">
+
+            <p id="clear-favorites" class="has-text-weight-medium has-text-centered">Clear Favorites</p>
+            
+
         </div>
+
     </div>
-    <div class="grid-x">
-        <div id="sidebar" class="cell small-4">
+
+    <div class="rows">
+
+        <div class="row has-background-dark has-text-light py-4 " >
+
             <div class="form-container">
-                <form id="actor-input-form">
-                    <label for="actor-name">Input an Actor</label>
-                    <input type="text" name="actor-name" id="actor-name">
-                    <button>Submit Name</button>
-                </form>
+                
+                <h3 class="has-text-weight-bold is-size-3">Search for an Actor:</h3>
+
+                    <form id="user-form">
+
+                    <label class="form-label" for="actor"></label>
+
+                    <input name="actor" id="actor-input" type="text" autofocus="true" class="form-input" />
+
+                    <button type="submit" id="submit-btn" class="submit-btn">Get Info!</button>
+
+                    <button type="submit" id="clear-btn" class="clear-btn">Clear!</button>
+
             </div>
-            <div id="favorites">
-                <h5>Favorites</h5>
-                <ul>
-                </ul>
+
+        </div>
+
+        <div class= "row has-background-dark has-text-light py-6 ">
+
+            <div class="has-text-weight-bold is-size-4" id="favorites">Favorites :</div>
+
+                <p class="favorites"></p>
+
+
+        </div>
+
+        <div id="main-content" class="row has-text-light has py-6 my-6">
+
+            <div class="pic-container">
+      
             </div>
+
+            <div class="main-container">
+
+            </div>
+
         </div>
-        <div id="main-content" class="cell small-8">
-        </div>
+
     </div>
   
     
