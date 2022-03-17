@@ -80,14 +80,22 @@ var createHistoryFromStorage = function(storageHistory) {
     }
 }
 
-// this should be edited to have both creation functions in there
-var createNewElements = function () {
-
+var clearContentBoxes = function() {
+    
 }
 
 // this needs to be edited to work with every time 
 var clear = function() {
-    inputEl.value = "";
+    if (mainDiv.classList.contains("has-background-dark")){
+        var divsToDelete = document.querySelectorAll(".cont-to-del")
+        var picToDelete = document.querySelector(".inside-item")
+        mainDiv.classList.remove("has-background-dark")
+        picToDelete.remove();
+        divsToDelete.forEach(div => {
+            div.remove();
+    });
+    }
+    
 }
 
 var clearButtonHandler = function (event) {
@@ -96,6 +104,8 @@ var clearButtonHandler = function (event) {
 }
 
 var createActorData = function (actorName){
+    mainDiv.classList.add("has-background-dark");
+
     var imdbUrl = "https://imdb-api.com/en/API/SearchName/k_01ly574i/" + actorName;
     // fetch IMDB
     fetch(imdbUrl).then(function(response) {
@@ -122,6 +132,7 @@ var createActorData = function (actorName){
 
                     // create dynamic elements
                     var actorContainer = document.createElement("div");
+                    actorContainer.classList.add("cont-to-del")
                     var actorPic = document.createElement("img");
 
                     // src for picture comes from IMDB 
@@ -183,6 +194,7 @@ var createActorData = function (actorName){
             }
 
             var actorInfoContainer = document.createElement("div");
+            actorInfoContainer.classList.add("cont-to-del")
             var actorName = document.createElement("p");
             var actorAge = document.createElement("p");
             var actorBirthday = document.createElement("p");
@@ -247,21 +259,25 @@ var displayErrorModal = function () {
     }
 }
 
+var createDataFromFav = function(event) {
+    var actorName = event.target.textContent
+    clear();
+    createActorData(actorName)
+}
 
-
-var buttonHandler = function (event) {
+var submitButtonHandler = function (event) {
     // prevents browser refresh
     event.preventDefault();
+    //there needs to be an if statment here
     
+    mainDiv.classList.add("has-background-dark")
+    inputEl.value = "";
     // takes user input and stores it in variable
     var actorName = inputEl.value.trim();
     historyList.push(actorName) 
     saveHistory(historyList)
-    // gives mainDiv a class so background will appear
-    mainDiv.classList.add("has-background-dark");
-    clear();
     // if there is an actor element in place, remove it 
-    //createActorData(actorName);    
+    createActorData(actorName);    
     createHistory(actorName);
 }
 
@@ -271,23 +287,13 @@ var newHistory = loadHistory();
 createHistoryFromStorage(newHistory);
 
 
-// event listener runs buttonHandler function on submit btn
-submitBtn.addEventListener("click", buttonHandler);
-
-// function to clear screen data
-/*clearFavorites(event) {
-    event.preventDefault();
-
-    mainDiv.textContent = "";
-
-    inputEl.value = "";
-
-    mainDiv.classList.remove("has-background-dark");
-
-}*/
+// event listener runs submitButtonHandler function on submit btn
+submitBtn.addEventListener("click", submitButtonHandler);
 
 // event listener on clear button
-clearBtn.addEventListener("click", clearButtonHandler);
+clearBtn.addEventListener("click", clear);
 
 // event listener for clear favorites button
 clearFavoritesBtn.addEventListener("click" , deleteHistory);
+
+favoriteListEl.addEventListener("click", createDataFromFav);
