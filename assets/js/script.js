@@ -65,12 +65,6 @@ var buttonHandler = function (event) {
     var url = "https://imdb-api.com/en/API/SearchName/k_01ly574i/" + actorName;
 
     // have actorName become a favorite
-<<<<<<< HEAD
-    var favorites = document.getElementById("favorites");
-    var favoriteAdd = document.querySelector(".favorites");
-=======
-
->>>>>>> 12e6c5a0e84e23ddd1c81ecba1cb577284025f7b
     favoriteAdd.textContent = inputEl.value.trim();
     favoriteAdd.classList.add("has-text-light", "is-size-5");
     favorites.appendChild(favoriteAdd);
@@ -79,12 +73,6 @@ var buttonHandler = function (event) {
 
     fetch(url).then(function(response) {
 
-<<<<<<< HEAD
-        console.log(response)
-
-        response.json().then(function(data) {
-            
-=======
         response.json().then(function(data) {
 
             if (data.errorMessage === "") {
@@ -133,7 +121,6 @@ var buttonHandler = function (event) {
 
             console.log(data.results[0].id);
 
->>>>>>> 12e6c5a0e84e23ddd1c81ecba1cb577284025f7b
             // obtain IMDB Actor Id
 
             var actorId = data.results[0].id
@@ -144,13 +131,6 @@ var buttonHandler = function (event) {
 
             fetch(secondUrl).then(function(response) {
 
-<<<<<<< HEAD
-                response.json().then(function(data) {
-
-                    // obtain image, movies/shows the actor is known for
-
-                    
-=======
                  response.json().then(function(data) {
 
                     // obtain image, movies/shows the actor is known for
@@ -160,7 +140,6 @@ var buttonHandler = function (event) {
                     console.log(data.image);
 
                     console.log(data.knownFor);
->>>>>>> 12e6c5a0e84e23ddd1c81ecba1cb577284025f7b
 
                     // create dynamic elements
 
@@ -177,15 +156,9 @@ var buttonHandler = function (event) {
                     var actorAwardsContainer = document.createElement("div");
 
                     var actorSummaryContainer = document.createElement("div");
-<<<<<<< HEAD
-                    
-                    // movie titles from IMDB
-                    
-=======
                         
                     // movie titles from IMDB
                         
->>>>>>> 12e6c5a0e84e23ddd1c81ecba1cb577284025f7b
                     var knownFor1 = data.knownFor[0].fullTitle;
 
                     var knownFor2 = data.knownFor[1].fullTitle;
@@ -229,14 +202,6 @@ var buttonHandler = function (event) {
 
                 })
 
-<<<<<<< HEAD
-            });
-
-        })
-
-        
-
-=======
             })
 
         })
@@ -244,7 +209,6 @@ var buttonHandler = function (event) {
     })
 
         
->>>>>>> 12e6c5a0e84e23ddd1c81ecba1cb577284025f7b
 
       
 
@@ -394,8 +358,6 @@ submitBtn.addEventListener("click", buttonHandler);
 // function to clear screen data
 
 
-<<<<<<< HEAD
-=======
     event.preventDefault();
 
     mainDiv.textContent = "";
@@ -406,7 +368,6 @@ submitBtn.addEventListener("click", buttonHandler);
 
 
 }
->>>>>>> 12e6c5a0e84e23ddd1c81ecba1cb577284025f7b
 
 // event listener on clear button
 
