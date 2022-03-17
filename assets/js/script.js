@@ -155,7 +155,6 @@ var buttonHandler = function (event) {
 
                     var actorAwardsContainer = document.createElement("div");
 
-                    var actorSummaryContainer = document.createElement("div");
                         
                     // movie titles from IMDB
                         
@@ -168,17 +167,12 @@ var buttonHandler = function (event) {
                     var knownFor4 = data.knownFor[3].fullTitle;
 
                     var awards = data.awards;
-
-                    //var summary = data.summary;
                     
-
                     actorMovieContainer.textContent = "This actor is known for : " +
                     
                     knownFor1 + ", " + knownFor2 + ", " + knownFor3 + ", " + knownFor4 + ".";
 
                     actorAwardsContainer.textContent = "Awards : " + awards;
-
-                    //actorSummaryContainer.textContent = "Summary: " + summary;
 
                     // add class for styling 
 
@@ -186,7 +180,6 @@ var buttonHandler = function (event) {
 
                     actorAwardsContainer.classList.add("is-size-3");
 
-                    //actorSummaryContainer.classList.add("is-size-3");
 
                     // append elements
 
@@ -315,7 +308,7 @@ var buttonHandler = function (event) {
 
             actorNationality.textContent = "Nationality : " + nationality;
 
-            actorNationality.classList.add("is-size-3");
+            actorNationality.classList.add("actor-information", "is-size-3");
 
             actorHeight.textContent = "Height : " + height + " meters";
 
@@ -361,8 +354,6 @@ var clearButtonHandler = function (event) {
 
     event.preventDefault();
 
-    mainDiv.textContent = "";
-
     inputEl.value = "";
 
     mainDiv.classList.remove("has-background-dark");
@@ -388,3 +379,7 @@ var clearFavorites = function (event) {
 // event listener for clear favorites button
  
 clearFavoritesBtn.addEventListener("click" , clearFavorites);
+
+
+/////////////////////////////////////////////////
+
