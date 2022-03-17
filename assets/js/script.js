@@ -55,6 +55,7 @@ var createHistory = function(actorInput) {
     saveHistory();
 }
 
+// this remove doesn't work at the moment, needs to be addressed
 var deleteHistory = function() {
     historyList = [];
     var allFavs = document.querySelectorAll(".favorite-actor");
@@ -75,11 +76,12 @@ var createHistoryFromStorage = function() {
     }
 }
 
+// this should be edited to have both creation functions in there
 var createNewElements = function () {
 
 }
 
-
+// this needs to be edited to work with every time 
 var clear = function() {
     inputEl.value = "";
 }
