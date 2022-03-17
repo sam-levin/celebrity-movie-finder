@@ -13,12 +13,25 @@ var ninjasKey = "EbyKJN6Fx+lZBTlMbCLTSw==0t4uz4G3aPpnWFgY"
 var submitBtn = document.getElementById("submit-btn");
 var clearBtn = document.getElementById("clear-btn");
 
-// we dont want background color to show up until search 
-// will add class later
+var clearFavoritesBtn = document.getElementById("clear-favorites-btn");
+
 var mainDiv = document.getElementById("main-content");
 var inputEl = document.querySelector("#actor-input");
 var mainContainer = document.querySelector(".main-container");
 var actorPicContainer = document.querySelector(".pic-container");
+
+var formElement = document.querySelector(".form-container");
+
+var favorites = document.getElementById("favorites");
+
+var favoriteAdd = document.querySelector(".favorites");
+
+
+
+
+/////////////////////////////////////////////////////////
+
+
 
 // function to search user input for data from both APIs
 
@@ -52,8 +65,12 @@ var buttonHandler = function (event) {
     var url = "https://imdb-api.com/en/API/SearchName/k_01ly574i/" + actorName;
 
     // have actorName become a favorite
+<<<<<<< HEAD
     var favorites = document.getElementById("favorites");
     var favoriteAdd = document.querySelector(".favorites");
+=======
+
+>>>>>>> 12e6c5a0e84e23ddd1c81ecba1cb577284025f7b
     favoriteAdd.textContent = inputEl.value.trim();
     favoriteAdd.classList.add("has-text-light", "is-size-5");
     favorites.appendChild(favoriteAdd);
@@ -62,10 +79,61 @@ var buttonHandler = function (event) {
 
     fetch(url).then(function(response) {
 
+<<<<<<< HEAD
         console.log(response)
 
         response.json().then(function(data) {
             
+=======
+        response.json().then(function(data) {
+
+            if (data.errorMessage === "") {
+
+                console.log("success");
+            
+            }
+
+            else {
+
+                // When the user clicks on the button, open the modal
+
+                mainDiv.classList.remove("has-background-dark");
+
+                // Get the modal
+
+                var modal = document.getElementById("myModal");
+
+                // Get the <span> element that closes the modal
+
+                var span = document.getElementsByClassName("close")[0];
+
+                modal.style.display = "flex";
+
+                // When the user clicks on <span> (x), close the modal
+
+                span.onclick = function() {
+
+                    modal.style.display = "none";
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                
+                window.onclick = function(event) {
+
+                    if (event.target == modal) {
+
+                    modal.style.display = "none";
+
+                    }
+                }
+
+            }
+
+            console.log(data);
+
+            console.log(data.results[0].id);
+
+>>>>>>> 12e6c5a0e84e23ddd1c81ecba1cb577284025f7b
             // obtain IMDB Actor Id
 
             var actorId = data.results[0].id
@@ -76,11 +144,23 @@ var buttonHandler = function (event) {
 
             fetch(secondUrl).then(function(response) {
 
+<<<<<<< HEAD
                 response.json().then(function(data) {
 
                     // obtain image, movies/shows the actor is known for
 
                     
+=======
+                 response.json().then(function(data) {
+
+                    // obtain image, movies/shows the actor is known for
+
+                    console.log(data);
+
+                    console.log(data.image);
+
+                    console.log(data.knownFor);
+>>>>>>> 12e6c5a0e84e23ddd1c81ecba1cb577284025f7b
 
                     // create dynamic elements
 
@@ -97,9 +177,15 @@ var buttonHandler = function (event) {
                     var actorAwardsContainer = document.createElement("div");
 
                     var actorSummaryContainer = document.createElement("div");
+<<<<<<< HEAD
                     
                     // movie titles from IMDB
                     
+=======
+                        
+                    // movie titles from IMDB
+                        
+>>>>>>> 12e6c5a0e84e23ddd1c81ecba1cb577284025f7b
                     var knownFor1 = data.knownFor[0].fullTitle;
 
                     var knownFor2 = data.knownFor[1].fullTitle;
@@ -143,14 +229,26 @@ var buttonHandler = function (event) {
 
                 })
 
+<<<<<<< HEAD
             });
 
         })
 
         
 
+=======
+            })
 
-    });
+        })
+
+    })
+
+        
+>>>>>>> 12e6c5a0e84e23ddd1c81ecba1cb577284025f7b
+
+      
+
+    
 
     // fetching Celebrity API
 
@@ -173,6 +271,44 @@ var buttonHandler = function (event) {
             // obtain facts about actor from Celebrity API
 
             console.log(result);
+
+            if (result.length === 0) {
+
+                // When the user clicks on the button, open the modal
+
+                mainDiv.classList.remove("has-background-dark");
+
+                // Get the modal
+  
+                var modal = document.getElementById("myModal");
+  
+                // Get the <span> element that closes the modal
+  
+                var span = document.getElementsByClassName("close")[0];
+  
+                modal.style.display = "flex";
+  
+                // When the user clicks on <span> (x), close the modal
+  
+                span.onclick = function() {
+  
+                    modal.style.display = "none";
+
+                }
+  
+                // When the user clicks anywhere outside of the modal, close it
+                  
+                window.onclick = function(event) {
+  
+                    if (event.target == modal) {
+  
+                        modal.style.display = "none";
+  
+                    }
+
+                }
+
+            }
 
             var actorInfoContainer = document.createElement("div");
 
@@ -240,14 +376,11 @@ var buttonHandler = function (event) {
             console.error('Error: ', jqXHR.responseText);
         }
 
-    }); 
-
-    
+    })
+  
 }
 
 /////////////////////////////////////////////////////////////////////////////
-
-// function to clear screen data
 
 
 
@@ -256,6 +389,40 @@ var buttonHandler = function (event) {
 
 submitBtn.addEventListener("click", buttonHandler);
 
+
+
+// function to clear screen data
+
+
+<<<<<<< HEAD
+=======
+    event.preventDefault();
+
+    mainDiv.textContent = "";
+
+    inputEl.value = "";
+
+    mainDiv.classList.remove("has-background-dark");
+
+
+}
+>>>>>>> 12e6c5a0e84e23ddd1c81ecba1cb577284025f7b
+
 // event listener on clear button
 
 clearBtn.addEventListener("click", clearButtonHandler);
+
+// function to clear favorites
+
+var clearFavorites = function (event) {
+
+    event.preventDefault();
+
+    favoriteAdd.textContent = "";
+
+
+}
+
+// event listener for clear favorites button
+ 
+clearFavoritesBtn.addEventListener("click" , clearFavorites);
