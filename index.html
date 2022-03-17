@@ -22,17 +22,17 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         crossorigin="anonymous"></script>
 
-        <title>Celebrity Movie Finder</title>
+        <title class="title size-2">Celebrity Movie Finder</title>
 
     </head>
 
 <body>
 
-    <div class="Columns has-background-light has-text-dark">
+    <div class="Columns has-background-dark has-text-light">
 
         <div class="column">
 
-            <h2 class="is-size-2 has-text-weight-bold has-text-centered">Celebrity Finder</h2></li>
+            <h2 class="is-size-2 has-text-weight-bold has-text-centered">Celebrity Finder</h2>
 
         </div>
 
@@ -45,8 +45,8 @@
 
     <!-- Modal content -->
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Whoops! Something went wrong. Please try again.</p>
+            <span class="close topright">&times;</span>
+            <p>Your celeb is not famous.. 😅  Please try again.</p>
         </div>
   
   </div>
@@ -57,17 +57,17 @@
 
             <div class="form-container">
                 
-                <h3 class="has-text-weight-bold is-size-3">Search for an Actor:</h3>
+                <h4 class="has-text-weight-bold is-size-3">Search for a Movie Star:</h4>
 
                     <form id="user-form">
 
                     <label class="form-label" for="actor"></label>
 
-                    <input name="actor" id="actor-input" type="text" autofocus="true" class="form-input" />
+                    <input name="actor" id="actor-input" type="text" autofocus="true" class="form-input" placeholder="Enter Name Here"/>
 
-                    <button type="submit" id="submit-btn" class="submit-btn">Get Info!</button>
+                    <button type="submit" id="submit-btn" class="button submit-btn is-small is-success">Get Info!</button>
 
-                    <button type="submit" id="clear-btn" class="clear-btn">Clear!</button>
+                    <button type="submit" id="clear-btn" class="button clear-btn is-small is-danger">Clear!</button>
 
             </div>
 
@@ -86,7 +86,7 @@
 
         </div>
 
-        <div id="main-content" class="row has-text-light has py-6 my-6 mt-6">
+        <div id="main-content" class="row has-text-light has py-2 my-2 mt-2">
 
             <div class="pic-container has-text-centered">
       
