@@ -22,7 +22,7 @@ var clearFavoritesBtn = document.getElementById("clear-favorites-btn");
 
 var mainDiv = document.getElementById("main-content");
 
-var inputEl = document.querySelector("#actor-input");
+var inputEl = document.querySelector(".input-field");
 
 var mainContainer = document.querySelector(".main-container");
 
@@ -334,6 +334,8 @@ var buttonHandler = function (event) {
         }
 
     })
+
+    inputEl.value = "";
   
 }
 
@@ -354,8 +356,8 @@ var clearButtonHandler = function (event) {
 
     event.preventDefault();
 
-    inputEl.value = "";
-
+    mainDiv.textContent = "";
+    
     mainDiv.classList.remove("has-background-dark");
 
 
