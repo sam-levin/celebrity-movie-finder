@@ -23,26 +23,27 @@ var formElement = document.querySelector(".form-container");
 var favorites = document.getElementById("favorites");
 var favoriteListEl = document.querySelector("#favorites-list");
 
-var historyList = [];
 
 /////////////////////////////////////////////////////////
 
 // this function saves the current history list
-var saveHistory = function() {
+var saveHistory = function(inputHistoryList) {
+    var historyList = inputHistoryList
     localStorage.setItem("history", JSON.stringify(historyList));
+
 }
 
 var loadHistory = function() {
     storedHistoryList = JSON.parse(localStorage.getItem("history"))
     if (!storedHistoryList) {
-        console.log("penis")
-//        historyList = []
+        loadedHistoryList = []
+    } else if (storedHistoryList == []){
+        loadedHistoryList = []
     } else {
-        console.log("asshat")
-        historyList = storedHistoryList    
-        console.log(historyList)
+        var loadedHistoryList = storedHistoryList    
     }
-    return(historyList)
+    saveHistory(loadedHistoryList);
+    return(loadedHistoryList)
 }
 
 var createHistory = function(actorInput) {
@@ -51,28 +52,31 @@ var createHistory = function(actorInput) {
     newListItem.classList.add("favorite-actor")
     newListItem.textContent = actorInput
     // this next line keeps pushing to the thing
-    favorites.appendChild(newListItem);
-    saveHistory();
+    favoriteListEl.appendChild(newListItem);
 }
 
 
-var deleteHistory = function() {
-    historyList = [];
+var deleteHistory = function(event) {
+    event.preventDefault()
+    var historyList = [];
     var allFavs = document.querySelectorAll(".favorite-actor");
-    allFavs.forEach(function(actor) {
-        delete(actor)
-    })
-    saveHistory();
+    allFavs.forEach(actor => {
+        actor.remove();
+    });
+    saveHistory(historyList);
 }
 
 // this creates a new history list from the items in storage
-var createHistoryFromStorage = function() {
-    if (!historyList) {
+var createHistoryFromStorage = function(storageHistory) {
+    if (!storageHistory) {
     } else {
-        for (i = 0; i < historyList.length; i++) {
-            createHistory(historyList[i])
+        newHistoryList = []
+        for (i = 0; i < storageHistory.length; i++) {
+            createHistory(storageHistory[i])
+            newHistoryList.push(storageHistory[i])
         }
-
+        historyList = newHistoryList
+        saveHistory(historyList);
     }
 }
 
@@ -252,18 +256,19 @@ var buttonHandler = function (event) {
     // takes user input and stores it in variable
     var actorName = inputEl.value.trim();
     historyList.push(actorName) 
+    saveHistory(historyList)
     // gives mainDiv a class so background will appear
     mainDiv.classList.add("has-background-dark");
     clear();
     // if there is an actor element in place, remove it 
-    createActorData(actorName);    
+    //createActorData(actorName);    
     createHistory(actorName);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 
-loadHistory();
-createHistoryFromStorage();
+var newHistory = loadHistory();
+createHistoryFromStorage(newHistory);
 
 
 // event listener runs buttonHandler function on submit btn
@@ -285,4 +290,4 @@ submitBtn.addEventListener("click", buttonHandler);
 clearBtn.addEventListener("click", clearButtonHandler);
 
 // event listener for clear favorites button
-clearFavoritesBtn.addEventListener("click" , deleteHistory());
+clearFavoritesBtn.addEventListener("click" , deleteHistory);
