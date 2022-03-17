@@ -73,108 +73,120 @@ var buttonHandler = function (event) {
 
     fetch(url).then(function(response) {
 
-        if (response.ok === true) {
+        response.json().then(function(data) {
 
-            response.json().then(function(data) {
+            if (data.errorMessage === "") {
 
-                console.log(data);
+                console.log("success");
+            
+            }
 
-                console.log(data.results[0].id);
+            else {
 
-                // obtain IMDB Actor Id
+                mainDiv.classList.remove("has-background-dark");
+                
+                window.alert("Whoops! Something went wrong. Please try again.")
 
-                var actorId = data.results[0].id
+                
 
-                // search IMDB again for actor page
+            }
 
-                var secondUrl = "https://imdb-api.com/API/Name/k_01ly574i/" + actorId;
+            console.log(data);
 
-                fetch(secondUrl).then(function(response) {
+            console.log(data.results[0].id);
 
-                    response.json().then(function(data) {
+            // obtain IMDB Actor Id
 
-                        // obtain image, movies/shows the actor is known for
+            var actorId = data.results[0].id
 
-                        console.log(data);
+            // search IMDB again for actor page
 
-                        console.log(data.image);
+            var secondUrl = "https://imdb-api.com/API/Name/k_01ly574i/" + actorId;
 
-                        console.log(data.knownFor);
+            fetch(secondUrl).then(function(response) {
 
-                        // create dynamic elements
+                 response.json().then(function(data) {
 
-                        var actorContainer = document.createElement("div");
+                    // obtain image, movies/shows the actor is known for
 
-                        var actorPic = document.createElement("img");
+                    console.log(data);
 
-                        // src for picture comes from IMDB 
+                    console.log(data.image);
 
-                        actorPic.src = data.image
+                    console.log(data.knownFor);
 
-                        var actorMovieContainer = document.createElement("div");
+                    // create dynamic elements
 
-                        var actorAwardsContainer = document.createElement("div");
+                    var actorContainer = document.createElement("div");
 
-                        var actorSummaryContainer = document.createElement("div");
+                    var actorPic = document.createElement("img");
+
+                    // src for picture comes from IMDB 
+
+                    actorPic.src = data.image
+
+                    var actorMovieContainer = document.createElement("div");
+
+                    var actorAwardsContainer = document.createElement("div");
+
+                    var actorSummaryContainer = document.createElement("div");
                         
-                        // movie titles from IMDB
+                    // movie titles from IMDB
                         
-                        var knownFor1 = data.knownFor[0].fullTitle;
+                    var knownFor1 = data.knownFor[0].fullTitle;
 
-                        var knownFor2 = data.knownFor[1].fullTitle;
+                    var knownFor2 = data.knownFor[1].fullTitle;
 
-                        var knownFor3 = data.knownFor[2].fullTitle;
+                    var knownFor3 = data.knownFor[2].fullTitle;
 
-                        var knownFor4 = data.knownFor[3].fullTitle;
+                    var knownFor4 = data.knownFor[3].fullTitle;
 
-                        var awards = data.awards;
+                    var awards = data.awards;
 
-                        //var summary = data.summary;
-                        
+                    //var summary = data.summary;
+                    
 
-                        actorMovieContainer.textContent = "This actor is known for : " +
-                        
-                        knownFor1 + ", " + knownFor2 + ", " + knownFor3 + ", " + knownFor4 + ".";
+                    actorMovieContainer.textContent = "This actor is known for : " +
+                    
+                    knownFor1 + ", " + knownFor2 + ", " + knownFor3 + ", " + knownFor4 + ".";
 
-                        actorAwardsContainer.textContent = "Awards : " + awards;
+                    actorAwardsContainer.textContent = "Awards : " + awards;
 
-                        //actorSummaryContainer.textContent = "Summary: " + summary;
+                    //actorSummaryContainer.textContent = "Summary: " + summary;
 
-                        // add class for styling 
+                    // add class for styling 
 
-                        actorMovieContainer.classList.add("is-size-3");
+                    actorMovieContainer.classList.add("is-size-3");
 
-                        actorAwardsContainer.classList.add("is-size-3");
+                    actorAwardsContainer.classList.add("is-size-3");
 
-                        //actorSummaryContainer.classList.add("is-size-3");
+                    //actorSummaryContainer.classList.add("is-size-3");
 
-                        // append elements
+                    // append elements
 
-                        actorPicContainer.appendChild(actorPic);
+                    actorPicContainer.appendChild(actorPic);
 
-                        actorContainer.appendChild(actorAwardsContainer);
+                    actorContainer.appendChild(actorAwardsContainer);
 
-                        actorContainer.appendChild(actorMovieContainer);
+                    actorContainer.appendChild(actorMovieContainer);
 
-                        // actorContainer.appendChild(actorSummaryContainer);
+                    // actorContainer.appendChild(actorSummaryContainer);
 
-                        mainContainer.appendChild(actorContainer);
+                    mainContainer.appendChild(actorContainer);
 
-                    })
-
-                });
+                })
 
             })
 
-        }
+        })
 
-        else if ( response.status === 400 ) { 
-            
-            window.alert("Whoops! Something went wrong. Please try again.");
+    })
 
-        }
+        
 
-    });
+      
+
+    
 
     // fetching Celebrity API
 
@@ -264,9 +276,8 @@ var buttonHandler = function (event) {
             console.error('Error: ', jqXHR.responseText);
         }
 
-    }); 
-
-    
+    })
+  
 }
 
 /////////////////////////////////////////////////////////////////////////////
