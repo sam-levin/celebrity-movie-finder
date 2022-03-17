@@ -271,12 +271,13 @@ var submitButtonHandler = function (event) {
     //there needs to be an if statment here
     
     mainDiv.classList.add("has-background-dark")
-    inputEl.value = "";
     // takes user input and stores it in variable
     var actorName = inputEl.value.trim();
     historyList.push(actorName) 
+    inputEl.value = "";
+
     saveHistory(historyList)
-    // if there is an actor element in place, remove it 
+    clear();
     createActorData(actorName);    
     createHistory(actorName);
 }
