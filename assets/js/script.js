@@ -3,8 +3,14 @@
 // imdb API key
 var key = "k_01ly574i"
 
+<<<<<<< HEAD
 // url to API Ninjas Celebrity API
 var ninjasUrl = "https://api.api-ninjas.com/v1/celebrity?name="
+=======
+var key = "k_01ly574i"
+
+var ninjasUrl = "https://api.api-ninjas.com/v1/celebrity?name=LeonardoDiCaprio"
+>>>>>>> aa6ad64406b423e768ae3a7b589f39c3bf896334
 
 // Celebrity API key
 var ninjasKey = "EbyKJN6Fx+lZBTlMbCLTSw==0t4uz4G3aPpnWFgY"
@@ -23,6 +29,7 @@ var formElement = document.querySelector(".form-container");
 var favorites = document.getElementById("favorites");
 var favoriteAdd = document.querySelector(".favorites");
 
+<<<<<<< HEAD
 
 
 
@@ -36,6 +43,13 @@ var clear = function() {
     console.log("clearfunction ran")
     inputEl.value = "";
     mainDiv.textContent = "";
+=======
+var printActorDetails = function(actorName, actorData){
+    var actorNameEl = $("<h5>").text(actorName)
+    var actorHeightEl = $("<h5>").text("Height: " + actorData[0].height + " meters ")
+    var actorAgeEl = $("<h5>").text("Age: " + actorData[0].age + " years old")
+    mainEl.append(actorNameEl, actorHeightEl, actorAgeEl)
+>>>>>>> aa6ad64406b423e768ae3a7b589f39c3bf896334
 }
 
 var clearButtonHandler = function (event) {
