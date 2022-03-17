@@ -18,11 +18,11 @@
     </head>
 <body>
 
-    <div class="Columns has-background-dark has-text-light">
+    <nav class="Columns has-background-dark has-text-light">
         <div class="column">
             <h2 class="is-size-2 has-text-weight-bold has-text-centered">Celebrity Finder</h2>
         </div>
-    </div>
+    </nav>
 
     <!-- The Modal -->
     <div id="myModal" class="modal">
@@ -36,7 +36,7 @@
 
     <div class="rows">
 
-        <div class="row has-background-dark has-text-light py-4 " >
+        <div class="row has-background-dark has-text-light py-4 ">
             <div class="form-container">
                 <h4 class="has-text-weight-bold is-size-3">Search for a Movie Star:</h4>
                     <form id="user-form">
@@ -48,9 +48,12 @@
         </div>
 
         <div class= "row has-background-dark has-text-light py-6 ">
-            <div class="columns has-text-weight-bold is-size-4 mx-2" id="favorites">Favorites :</div>
+            <div class="columns is-size-4 mx-2" id="favorites">
+                <h4 class="has-text-weight-bold">Favorites:</h4>
+            </div>
             <button type="submit" id="clear-favorites-btn" class="column has-text-weight-medium">Clear Favorites</button>
-            <p class="column mx-6 favorites"></p>
+            <ul class="column mx-6" id="favorites-list">
+            </ul>
         </div>
 
         <div id="main-content" class="row has-text-light has py-2 my-2 mt-2">
@@ -61,11 +64,7 @@
         </div>
 
     </div>
-  
-    
-  
- 
-  
+
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>

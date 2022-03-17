@@ -21,9 +21,63 @@ var actorPicContainer = document.querySelector(".pic-container");
 
 var formElement = document.querySelector(".form-container");
 var favorites = document.getElementById("favorites");
-var favoriteAdd = document.querySelector(".favorites");
+var favoriteListEl = document.querySelector("#favorites-list");
+
+var historyList = [];
 
 /////////////////////////////////////////////////////////
+
+// this function saves the current history list
+var saveHistory = function() {
+    localStorage.setItem("history", JSON.stringify(historyList));
+}
+
+var loadHistory = function() {
+    storedHistoryList = JSON.parse(localStorage.getItem("history"))
+    if (!storedHistoryList) {
+        console.log("penis")
+//        historyList = []
+    } else {
+        console.log("asshat")
+        historyList = storedHistoryList    
+        console.log(historyList)
+    }
+    return(historyList)
+}
+
+var createHistory = function(actorInput) {
+    // have actorName become a favorite
+    var newListItem = document.createElement("li")
+    newListItem.classList.add("favorite-actor")
+    newListItem.textContent = actorInput
+    // this next line keeps pushing to the thing
+    favorites.appendChild(newListItem);
+    saveHistory();
+}
+
+var deleteHistory = function() {
+    historyList = [];
+    var allFavs = document.querySelectorAll(".favorite-actor");
+    allFavs.forEach(function(actor) {
+        remove(actor)
+    })
+    saveHistory();
+}
+
+// this creates a new history list from the items in storage
+var createHistoryFromStorage = function() {
+    if (!historyList) {
+    } else {
+        for (i = 0; i < historyList.length; i++) {
+            createHistory(historyList[i])
+        }
+
+    }
+}
+
+var createNewElements = function () {
+
+}
 
 
 var clear = function() {
@@ -67,6 +121,7 @@ var createActorData = function (actorName){
                     // src for picture comes from IMDB 
 
                     actorPic.src = data.image
+                    actorPic.classList.add("inside-item")
                     var actorMovieContainer = document.createElement("div");
                     var actorAwardsContainer = document.createElement("div");
                     var actorSummaryContainer = document.createElement("div");
@@ -186,30 +241,27 @@ var displayErrorModal = function () {
     }
 }
 
-var addToFavoritesEl = function(actorInput) {
-    // have actorName become a favorite
-    favoriteAdd.textContent = actorInput;
-    favoriteAdd.classList.add("has-text-light", "is-size-5");
-    favorites.appendChild(favoriteAdd);
-}
+
 
 var buttonHandler = function (event) {
-
     // prevents browser refresh
     event.preventDefault();
     
     // takes user input and stores it in variable
     var actorName = inputEl.value.trim();
-
+    historyList.push(actorName) 
     // gives mainDiv a class so background will appear
     mainDiv.classList.add("has-background-dark");
+    clear();
+    // if there is an actor element in place, remove it 
     createActorData(actorName);    
-    addToFavoritesEl(actorName);
+    createHistory(actorName);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 
-
+loadHistory();
+createHistoryFromStorage();
 
 
 // event listener runs buttonHandler function on submit btn
@@ -230,11 +282,5 @@ submitBtn.addEventListener("click", buttonHandler);
 // event listener on clear button
 clearBtn.addEventListener("click", clearButtonHandler);
 
-// function to clear favorites
-var clearFavorites = function (event) {
-    event.preventDefault();
-    favoriteAdd.textContent = "";
-}
-
 // event listener for clear favorites button
-clearFavoritesBtn.addEventListener("click" , clearFavorites);
+clearFavoritesBtn.addEventListener("click" , deleteHistory());
