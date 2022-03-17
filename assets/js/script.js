@@ -48,6 +48,18 @@ var buttonHandler = function (event) {
 
     var url = "https://imdb-api.com/en/API/SearchName/k_01ly574i/" + actorName;
 
+    // have actorName become a favorite
+
+    var favorites = document.getElementById("favorites");
+
+    var favoriteAdd = document.querySelector(".favorites");
+
+    favoriteAdd.textContent = inputEl.value.trim();
+
+    favoriteAdd.classList.add("has-text-light", "is-size-5");
+
+    favorites.appendChild(favoriteAdd);
+
     // fetch IMDB
 
     fetch(url).then(function(response) {
@@ -244,6 +256,7 @@ var buttonHandler = function (event) {
         }
 
     }); 
+
     
 }
 
@@ -251,7 +264,9 @@ var buttonHandler = function (event) {
 
 // function to clear screen data
 
-var clearButtonHandler = function () {
+var clearButtonHandler = function (event) {
+
+    event.preventDefault();
 
     inputEl.textContent = "";
 
