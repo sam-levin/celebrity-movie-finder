@@ -12,7 +12,6 @@ var ninjasKey = "EbyKJN6Fx+lZBTlMbCLTSw==0t4uz4G3aPpnWFgY"
 // targeting some html elements
 var submitBtn = document.getElementById("submit-btn");
 var clearBtn = document.getElementById("clear-btn");
-
 var clearFavoritesBtn = document.getElementById("clear-favorites-btn");
 
 var mainDiv = document.getElementById("main-content");
@@ -21,9 +20,7 @@ var mainContainer = document.querySelector(".main-container");
 var actorPicContainer = document.querySelector(".pic-container");
 
 var formElement = document.querySelector(".form-container");
-
 var favorites = document.getElementById("favorites");
-
 var favoriteAdd = document.querySelector(".favorites");
 
 
@@ -42,11 +39,8 @@ var clear = function() {
 }
 
 var clearButtonHandler = function (event) {
-
     event.preventDefault();
     clear();
-    
-
 }
 
 var buttonHandler = function (event) {
@@ -356,8 +350,7 @@ submitBtn.addEventListener("click", buttonHandler);
 
 
 // function to clear screen data
-
-
+/*clearFavorites(event) {
     event.preventDefault();
 
     mainDiv.textContent = "";
@@ -366,8 +359,11 @@ submitBtn.addEventListener("click", buttonHandler);
 
     mainDiv.classList.remove("has-background-dark");
 
+}*/
 
-}
+    
+
+
 
 // event listener on clear button
 
