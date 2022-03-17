@@ -55,12 +55,12 @@ var createHistory = function(actorInput) {
     saveHistory();
 }
 
-// this remove doesn't work at the moment, needs to be addressed
+
 var deleteHistory = function() {
     historyList = [];
     var allFavs = document.querySelectorAll(".favorite-actor");
     allFavs.forEach(function(actor) {
-        remove(actor)
+        delete(actor)
     })
     saveHistory();
 }
