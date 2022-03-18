@@ -33,6 +33,31 @@ var saveHistory = function(inputHistoryList) {
 
 }
 
+var displayErrorModal = function () {
+    // When the user clicks on the button, open the modal
+    mainDiv.classList.remove("has-background-dark");
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    modal.style.display = "flex";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    }
+}
+
 var loadHistory = function() {
     storedHistoryList = JSON.parse(localStorage.getItem("history"))
     if (!storedHistoryList) {
@@ -80,17 +105,17 @@ var createHistoryFromStorage = function(storageHistory) {
     }
 }
 
-var clearContentBoxes = function() {
-    
-}
-
 // this needs to be edited to work with every time 
 var clear = function() {
+    console.log(mainDiv.classList)
+
     if (mainDiv.classList.contains("has-background-dark")){
+        console.log(mainDiv.classList)
+        console.log("contain test worked")
         var divsToDelete = document.querySelectorAll(".cont-to-del")
         var picToDelete = document.querySelector(".inside-item")
         mainDiv.classList.remove("has-background-dark")
-        picToDelete.remove();
+        picToDelete.remove(); 
         divsToDelete.forEach(div => {
             div.remove();
     });
@@ -234,30 +259,7 @@ var createActorData = function (actorName){
     })
 }
 
-var displayErrorModal = function () {
-    // When the user clicks on the button, open the modal
-    mainDiv.classList.remove("has-background-dark");
 
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    modal.style.display = "flex";
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-        modal.style.display = "none";
-        }
-    }
-}
 
 var createDataFromFav = function(event) {
     var actorName = event.target.textContent
@@ -270,7 +272,6 @@ var submitButtonHandler = function (event) {
     event.preventDefault();
     //there needs to be an if statment here
     
-    mainDiv.classList.add("has-background-dark")
     // takes user input and stores it in variable
     var actorName = inputEl.value.trim();
     historyList.push(actorName) 
@@ -278,6 +279,8 @@ var submitButtonHandler = function (event) {
 
     saveHistory(historyList)
     clear();
+    mainDiv.classList.add("has-background-dark")
+
     createActorData(actorName);    
     createHistory(actorName);
 }
