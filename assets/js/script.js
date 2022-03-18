@@ -33,6 +33,31 @@ var saveHistory = function(inputHistoryList) {
 
 }
 
+var displayErrorModal = function () {
+    // When the user clicks on the button, open the modal
+    mainDiv.classList.remove("has-background-dark");
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    modal.style.display = "flex";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    }
+}
+
 var loadHistory = function() {
     storedHistoryList = JSON.parse(localStorage.getItem("history"))
     if (!storedHistoryList) {
@@ -80,17 +105,17 @@ var createHistoryFromStorage = function(storageHistory) {
     }
 }
 
-var clearContentBoxes = function() {
-    
-}
-
 // this needs to be edited to work with every time 
 var clear = function() {
+    console.log(mainDiv.classList)
+
     if (mainDiv.classList.contains("has-background-dark")){
+        console.log(mainDiv.classList)
+        console.log("contain test worked")
         var divsToDelete = document.querySelectorAll(".cont-to-del")
         var picToDelete = document.querySelector(".inside-item")
         mainDiv.classList.remove("has-background-dark")
-        picToDelete.remove();
+        picToDelete.remove(); 
         divsToDelete.forEach(div => {
             div.remove();
     });
@@ -153,14 +178,14 @@ var createActorData = function (actorName){
                     //var summary = data.summary;
                     
 
-                    actorMovieContainer.textContent = "This actor is known for : " +                    
-                    knownFor1 + ", " + knownFor2 + ", " + knownFor3 + ", " + knownFor4 + ".";
-                    actorAwardsContainer.textContent = "Awards : " + awards;
+                    actorMovieContainer.textContent = "Best known for: " +                    
+                    knownFor1 + ", " + knownFor2 + ", " + knownFor3 + ", and " + knownFor4 + ".";
+                    actorAwardsContainer.textContent = "Awards: " + awards;
                     //actorSummaryContainer.textContent = "Summary: " + summary;
 
                     // add class for styling 
-                    actorMovieContainer.classList.add("is-size-3");
-                    actorAwardsContainer.classList.add("is-size-3");
+                    actorMovieContainer.classList.add("is-size-4");
+                    actorAwardsContainer.classList.add("is-size-4");
 
                     //actorSummaryContainer.classList.add("is-size-3");
 
@@ -207,18 +232,18 @@ var createActorData = function (actorName){
             var height = result[0].height;
 
             // we display actor's name, age, birthday, nationality
-            actorName.textContent = "Name : " + name;
+            actorName.textContent = "Name: " + name;
 
             // update class for stling
-            actorName.classList.add("is-size-2");
-            actorAge.textContent = "Age : " + age;
-            actorAge.classList.add("is-size-3");
-            actorBirthday.textContent = "Birthday : " + birthday;
-            actorBirthday.classList.add("is-size-3");
-            actorNationality.textContent = "Nationality : " + nationality;
-            actorNationality.classList.add("is-size-3");
-            actorHeight.textContent = "Height : " + height + " meters";
-            actorHeight.classList.add("is-size-3");
+            actorName.classList.add("is-size-3");
+            actorAge.textContent = "Age: " + age;
+            actorAge.classList.add("is-size-4");
+            actorBirthday.textContent = "Birthday (YYYY-MM-DD): " + birthday;
+            actorBirthday.classList.add("is-size-4");
+            actorNationality.textContent = "Nationality: " + nationality;
+            actorNationality.classList.add("is-size-4");
+            actorHeight.textContent = "Height: " + height + " meters";
+            actorHeight.classList.add("is-size-4");
             
             actorInfoContainer.appendChild(actorName);
             actorInfoContainer.appendChild(actorAge);
@@ -234,30 +259,7 @@ var createActorData = function (actorName){
     })
 }
 
-var displayErrorModal = function () {
-    // When the user clicks on the button, open the modal
-    mainDiv.classList.remove("has-background-dark");
 
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    modal.style.display = "flex";
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-        modal.style.display = "none";
-        }
-    }
-}
 
 var createDataFromFav = function(event) {
     var actorName = event.target.textContent
@@ -270,7 +272,6 @@ var submitButtonHandler = function (event) {
     event.preventDefault();
     //there needs to be an if statment here
     
-    mainDiv.classList.add("has-background-dark")
     // takes user input and stores it in variable
     var actorName = inputEl.value.trim();
     historyList.push(actorName) 
@@ -278,6 +279,8 @@ var submitButtonHandler = function (event) {
 
     saveHistory(historyList)
     clear();
+    mainDiv.classList.add("has-background-dark")
+
     createActorData(actorName);    
     createHistory(actorName);
 }
@@ -286,7 +289,6 @@ var submitButtonHandler = function (event) {
 
 var newHistory = loadHistory();
 createHistoryFromStorage(newHistory);
-
 
 // event listener runs submitButtonHandler function on submit btn
 submitBtn.addEventListener("click", submitButtonHandler);
