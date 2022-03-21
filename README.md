@@ -19,7 +19,7 @@ Previous searches are saved in localStorage and the five (5) most recent searche
 ## Website
 https://sam-levin.github.io/celebrity-movie-finder/
 <br></br>
-<img alt="Celebrity Finder Screenshot" src="./CelebFinderSS">
+<img alt="Celebrity Finder Screenshot" src="./CelebFinderSS.png">
 <br></br>
 
 ## Contribution
