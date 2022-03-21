@@ -178,14 +178,14 @@ var createActorData = function (actorName){
                     //var summary = data.summary;
                     
 
-                    actorMovieContainer.textContent = "This actor is known for : " +                    
-                    knownFor1 + ", " + knownFor2 + ", " + knownFor3 + ", " + knownFor4 + ".";
-                    actorAwardsContainer.textContent = "Awards : " + awards;
+                    actorMovieContainer.textContent = "Best known for: " +                    
+                    knownFor1 + ", " + knownFor2 + ", " + knownFor3 + ", and " + knownFor4 + ".";
+                    actorAwardsContainer.textContent = "Awards: " + awards;
                     //actorSummaryContainer.textContent = "Summary: " + summary;
 
                     // add class for styling 
-                    actorMovieContainer.classList.add("is-size-3");
-                    actorAwardsContainer.classList.add("is-size-3");
+                    actorMovieContainer.classList.add("is-size-4");
+                    actorAwardsContainer.classList.add("is-size-4");
 
                     //actorSummaryContainer.classList.add("is-size-3");
 
@@ -232,18 +232,18 @@ var createActorData = function (actorName){
             var height = result[0].height;
 
             // we display actor's name, age, birthday, nationality
-            actorName.textContent = "Name : " + name;
+            actorName.textContent = name;
 
-            // update class for stling
-            actorName.classList.add("is-size-2");
-            actorAge.textContent = "Age : " + age;
-            actorAge.classList.add("is-size-3");
-            actorBirthday.textContent = "Birthday : " + birthday;
-            actorBirthday.classList.add("is-size-3");
-            actorNationality.textContent = "Nationality : " + nationality;
-            actorNationality.classList.add("is-size-3");
-            actorHeight.textContent = "Height : " + height + " meters";
-            actorHeight.classList.add("is-size-3");
+            // update class for styling
+            actorName.classList.add("is-size-3");
+            actorAge.textContent = "Age: " + age;
+            actorAge.classList.add("is-size-4");
+            actorBirthday.textContent = "Birthday (YYYY-MM-DD): " + birthday;
+            actorBirthday.classList.add("is-size-4");
+            actorNationality.textContent = "Nationality: " + nationality;
+            actorNationality.classList.add("is-size-4");
+            actorHeight.textContent = "Height: " + (height*3.28).toPrecision(3) + " feet";
+            actorHeight.classList.add("is-size-4");
             
             actorInfoContainer.appendChild(actorName);
             actorInfoContainer.appendChild(actorAge);

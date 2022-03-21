@@ -17,9 +17,9 @@ Previous searches are saved in localStorage and the five (5) most recent searche
 <br></br>
 
 ## Website
-waiting on app deployment
-
-![web page screenshot](waiting on app deployment)
+https://sam-levin.github.io/celebrity-movie-finder/
+<br></br>
+<img alt="Celebrity Finder Screenshot" src="./CelebFinderSS2.png">
 <br></br>
 
 ## Contribution
