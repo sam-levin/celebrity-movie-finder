@@ -242,7 +242,7 @@ var createActorData = function (actorName){
             actorBirthday.classList.add("is-size-4");
             actorNationality.textContent = "Nationality: " + nationality;
             actorNationality.classList.add("is-size-4");
-            actorHeight.textContent = "Height: " + height + " meters";
+            actorHeight.textContent = "Height: " + (height*3.28).toPrecision(3) + " feet";
             actorHeight.classList.add("is-size-4");
             
             actorInfoContainer.appendChild(actorName);
