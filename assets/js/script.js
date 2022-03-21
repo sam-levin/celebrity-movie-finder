@@ -232,9 +232,9 @@ var createActorData = function (actorName){
             var height = result[0].height;
 
             // we display actor's name, age, birthday, nationality
-            actorName.textContent = "Name: " + name;
+            actorName.textContent = name;
 
-            // update class for stling
+            // update class for styling
             actorName.classList.add("is-size-3");
             actorAge.textContent = "Age: " + age;
             actorAge.classList.add("is-size-4");
